@@ -1,0 +1,85 @@
+*, *::before, *::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "JetBrains Mono ExtraLight", sans-serif;
+    font-size: 16px;
+}
+
+#notificator {
+    position: fixed;
+    width: 360px;
+    display: flex;
+}
+#notificator > .notify {
+    background-color: rgba(15, 15, 15, 0.8);
+    border-radius: 4px;
+    margin: 1px;
+    padding: 10px;
+    color: white;
+    position: relative;
+    transition: background-color 200ms linear;
+    transform: translateX(0);
+}
+#notificator > .notify:hover {
+    background-color: rgba(15, 15, 15, 1);
+}
+#notificator > .notify.info {
+    background-color: rgba(1, 46, 0, 0.8);
+}
+#notificator > .notify.info:hover {
+    background-color: rgba(1, 46, 0, 1);
+}
+#notificator > .notify.warning {
+    background-color: rgba(255, 72, 0, 0.8);
+}
+#notificator > .notify.warning:hover {
+    background-color: rgba(255, 72, 0, 1);
+}
+#notificator > .notify.error {
+    background-color: rgba(217, 0, 0, 0.8);
+}
+#notificator > .notify.error:hover {
+    background-color: rgba(217, 0, 0, 1);
+}
+#notificator > .notify > .close {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 10px;
+    height: 10px;
+    transform: rotateZ(0deg);
+    transition: transform 100ms linear;
+}
+#notificator > .notify > .close::before,
+#notificator > .notify > .close::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotateZ(-45deg);
+    transform-origin: center;
+    background-color: white;
+}
+#notificator > .notify > .close::after {
+    transform: translate(-50%, -50%) rotateZ(45deg);
+}
+#notificator > .notify > .close:hover {
+    cursor: pointer;
+    transform: rotateZ(-90deg);
+    transition: transform 200ms linear;
+}
+#notificator > .notify.removing-to-left,
+#notificator > .notify.removing-to-right {
+    transition-property: opacity, transform;
+    transition-duration: 350ms;
+    transition-timing-function: cubic-bezier(.68,-0.55,.27,1.55);
+    opacity: 0;
+    transform: translateX(-100%);
+}
+#notificator > .notify.removing-to-right {
+    transform: translateX(100%);
+}
+
