@@ -10,6 +10,7 @@
     position: fixed;
     width: 360px;
     display: flex;
+    z-index: 100;
 }
 #notificator > .notify {
     background-color: rgba(15, 15, 15, 0.8);

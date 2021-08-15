@@ -76,7 +76,7 @@ let CreateNotification = function (position) {
          * @param timeout {number}
          * @constructor
          */
-        Notify(message, type, timeout) {
+        Notify(message, type, timeout = DEFAULT_TIMEOUT) {
             if (!rootElement || !rootElement.parentElement) {
                 createRootElement();
             }
@@ -108,24 +108,25 @@ let CreateNotification = function (position) {
     };
 };
 
-let N = CreateNotification("bottom-right");
+let Messenger = CreateNotification("bottom-right");
 
-let notifyString = [
-    "Это просто какое-то сообщение",
-    "Это информационное сообщение",
-    "Это предупреждающее сообщение",
-    "Это сообщение об ошибки",
-    "Вышедшее за рамки"
-];
-let notifyType = [
-    MESSAGE_DEFAULT,
-    MESSAGE_INFO,
-    MESSAGE_WARNING,
-    MESSAGE_ERROR
-];
-
-for (let i = 0; i < notifyString.length; i++) {
-    setTimeout(() => {
-        N.Notify(notifyString[i], notifyType[i], 10000);
-    }, 1500 * i);
-}
+// TEST ONLY
+// let notifyString = [
+//     "Это просто какое-то сообщение",
+//     "Это информационное сообщение",
+//     "Это предупреждающее сообщение",
+//     "Это сообщение об ошибки",
+//     "Вышедшее за рамки"
+// ];
+// let notifyType = [
+//     MESSAGE_DEFAULT,
+//     MESSAGE_INFO,
+//     MESSAGE_WARNING,
+//     MESSAGE_ERROR
+// ];
+//
+// for (let i = 0; i < notifyString.length; i++) {
+//     setTimeout(() => {
+//         Messenger.Notify(notifyString[i], notifyType[i], 10000);
+//     }, 1500 * i);
+// }

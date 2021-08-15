@@ -1,0 +1,79 @@
+*, *::before, *::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "JetBrains Mono ExtraLight", sans-serif;
+    font-size: 16px;
+}
+
+@keyframes spinner {
+    0% { transform: rotate(0) }
+    100% { transform: rotate(360deg) }
+}
+.spinner > div {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    border: 4px solid;
+    border-color: #008fd4 transparent #008fd4 transparent;
+    animation: spinner 0.6756756756756757s linear infinite;
+}
+.spinner > div:nth-child(2), .spinner > div:nth-child(4) {
+    width: 36px;
+    height: 36px;
+    top: 6px;
+    left: 6px;
+    animation: spinner 0.6756756756756757s linear infinite reverse;
+}
+.spinner > div:nth-child(2) {
+    border-color: transparent #001f2d transparent #001f2d
+}
+.spinner > div:nth-child(3) { border-color: transparent }
+.spinner > div:nth-child(3) div {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: rotate(45deg);
+}
+.spinner > div:nth-child(3) div:before, .spinner > div:nth-child(3) div:after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    top: -4px;
+    left: 42px;
+    background: #008fd4;
+    border-radius: 50%;
+    box-shadow: 0 92px 0 0 #008fd4;
+}
+.spinner > div:nth-child(3) div:after {
+    left: -4px;
+    top: 42px;
+    box-shadow: 92px 0 0 0 #008fd4;
+}
+.spinner > div:nth-child(4) { border-color: transparent; }
+.spinner > div:nth-child(4) div {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: rotate(45deg);
+}
+.loading {
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+    overflow: hidden;
+    background: none;
+}
+.spinner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    transform-origin: 0 0; /* see note above */
+}
