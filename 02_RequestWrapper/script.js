@@ -3,36 +3,40 @@ const Request = (function () {
     /**
      * @type {HTMLElement}
      */
-    let loadingElement = document.querySelector(".loading");
+    let animationElement = document.querySelector(".loading");
     let counterValue = 0;
-    let animationCounter = {};
+    let animationCount = {};
 
-    Object.defineProperty(animationCounter, "Count", {
+    Object.defineProperty(animationCount, "Count", {
         get: function () {
             return counterValue;
         },
         set: function (value) {
             counterValue = value;
             if (counterValue > 0) {
-                loadingElement.style.display = "initial";
+                if (animationElement) {
+                    animationElement.style.display = "initial";
+                }
             } else {
                 counterValue = 0;
-                loadingElement.style.display = "none";
+                if (animationElement) {
+                    animationElement.style.display = "none";
+                }
             }
         }
-    })
+    });
 
     return {
+
         /**
-         *
          * @param url {string} адрес запроса
-         * @param params {any?} тело запроса
-         * @param callback {(data: any, params?: any, reverseCallback?: (...params?: any)=>any)=>any?}
-         * @param options {{isAsync?: boolean, isMultipart?: boolean, callbackParams?: any, callbackCallback?: (...params?: any)=>any}}
+         * @param params {any} тело запроса
+         * @param callback {(data: any, params?: any, reverseCallback?: (any)=>any)=>any?}
+         * @param options {{isAsync?: boolean, isMultipart?: boolean, callbackParams?: any, callbackCallback?: (any)=>any}}
          * @constructor
          */
         POST(url, params, callback, options) {
-            if (!url || typeof url === "string" || url.length === 0) {
+            if (!url || typeof url !== "string" || url.length === 0) {
                 return;
             }
 
@@ -45,12 +49,13 @@ const Request = (function () {
             }
 
             let xhr = new XMLHttpRequest();
+
             xhr.onloadstart = function (e) {
-                animationCounter.Count++;
-            }
+                animationCount.Count++;
+            };
             xhr.onloadend = function (e) {
-                animationCounter.Count--;
-            }
+                animationCount.Count--;
+            };
             xhr.onload = function (e) {
                 let response = undefined;
 
@@ -69,19 +74,18 @@ const Request = (function () {
                         callback(response, options.callbackParams, options.callbackCallback);
                     }
                 }
-            }
+            };
             xhr.onabort = function (e) {
-                Messenger.Notify("Запрос был прерван пользователем", MESSAGE_WARNING);
-            }
+                Messenger.Notify("Запрос был прерван", MESSAGE_WARNING);
+            };
             xhr.onerror = function (e) {
-                Messenger.Notify("Выполнение запроса завершилось неудачей", MESSAGE_ERROR);
-            }
+                Messenger.Notify("Ошибка выполнения запроса", MESSAGE_ERROR);
+            };
             xhr.ontimeout = function (e) {
-                Messenger.Notify("Время выполнения запроса истекло", MESSAGE_ERROR);
-            }
+                Messenger.Notify("Время запроса истекло", MESSAGE_ERROR);
+            };
 
             xhr.open("POST", url, !("isAsync" in options) || !!options.isAsync);
-
             if (!!options.isMultipart) {
                 xhr.send(params);
             } else {
@@ -90,11 +94,11 @@ const Request = (function () {
                 xhr.send(JSON.stringify(params));
             }
         }
-    };
+    }
 })();
 
-function postLogin(data) {
+function postLogin(response) {
 
 }
 
-Request.POST("/user/login", {Login: "", Pass: ""}, postLogin);
+Request.POST("/user/login", {Login: "admin", Pass: "admin"}, postLogin);
