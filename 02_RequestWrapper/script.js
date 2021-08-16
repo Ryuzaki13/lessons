@@ -96,9 +96,3 @@ const Request = (function () {
         }
     }
 })();
-
-function postLogin(response) {
-
-}
-
-Request.POST("/user/login", {Login: "admin", Pass: "admin"}, postLogin);
