@@ -5,3 +5,74 @@
     font-family: "JetBrains Mono ExtraLight", sans-serif;
     font-size: 16px;
 }
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+}
+
+main {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 4px 4px 20px #ccc;
+    width: 80%;
+    height: 80%;
+    display: grid;
+    grid-template-columns: 1fr 100px 1fr;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.controls > .button {
+    padding: 10px;
+    margin: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: border-color 200ms linear;
+    user-select: none;
+    text-align: center;
+}
+
+.controls > .button:hover {
+    cursor: pointer;
+    border-color: #888;
+}
+
+.controls > .button.disabled {
+    background-color: #eee;
+    pointer-events: none;
+}
+
+.list {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.list > .item {
+    margin: 5px;
+    padding: 5px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    border: 1px solid #888;
+    user-select: none;
+    transform: translate(0, 0);
+    transition: transform 200ms cubic-bezier(1,0,0,1);
+}
+
+.list > .item:hover {
+    cursor: pointer;
+    background-color: #e9f9e9;
+}
+
+.list > .item.selected {
+    border-color: #e08282;
+    background-color: #f9e9e9;
+}
